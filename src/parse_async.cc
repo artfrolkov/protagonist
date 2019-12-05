@@ -125,7 +125,7 @@ void AsyncParseAfter(uv_work_t* request) {
     else
         argv[0] = SourceAnnotation::WrapSourceAnnotation(baton->parseResult.report.error);
 
-    TryCatch try_catch;
+    TryCatch try_catch(v8::Isolate::GetCurrent());
     Local<Function> callback = Nan::New<Function>(baton->callback);
     callback->Call(Nan::GetCurrentContext()->Global(), argc, argv);
 

@@ -118,7 +118,7 @@ void AsyncValidateAfter(uv_work_t* request) {
     else
         argv[1] = v8_wrap(baton->result)->ToObject();
 
-    TryCatch try_catch;
+    TryCatch try_catch(v8::Isolate::GetCurrent());
     Local<Function> callback = Nan::New<Function>(baton->callback);
     callback->Call(Nan::GetCurrentContext()->Global(), argc, argv);
 
